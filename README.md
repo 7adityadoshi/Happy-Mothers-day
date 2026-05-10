@@ -1,6 +1,6 @@
 # Happy-Mothers-day
 
-Interactive single-page Mother&apos;s Day celebration built with React, HTML5 Canvas, and Tailwind CSS.
+Interactive single-page Mother's Day celebration built with React, HTML5 Canvas, and Tailwind CSS.
 
 ## Setup
 

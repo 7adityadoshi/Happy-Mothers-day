@@ -222,17 +222,15 @@ function WorkGame({ avatar, audioContextRef, onBack }) {
     }
 
     const checkMilestone = (currentScore) => {
-      Promise.resolve().then(() => {
-        if (
-          currentScore > 0 &&
-          currentScore !== lastMilestone.current &&
-          (currentScore % 50 === 0 || currentScore % 100 === 0)
-        ) {
-          lastMilestone.current = currentScore
-          setMilestoneText(randomCompliment())
-          window.setTimeout(() => setMilestoneText(''), 1200)
-        }
-      })
+      if (
+        currentScore > 0 &&
+        currentScore !== lastMilestone.current &&
+        (currentScore % 50 === 0 || currentScore % 100 === 0)
+      ) {
+        lastMilestone.current = currentScore
+        setMilestoneText(randomCompliment())
+        window.setTimeout(() => setMilestoneText(''), 1200)
+      }
     }
 
     const loop = (timestamp) => {
@@ -428,17 +426,15 @@ function SubwayGame({ avatar, audioContextRef, onBack }) {
     window.addEventListener('keydown', onKey)
 
     const checkMilestone = () => {
-      Promise.resolve().then(() => {
-        if (
-          scoreValue > 0 &&
-          scoreValue !== lastMilestone.current &&
-          (scoreValue % 50 === 0 || scoreValue % 100 === 0)
-        ) {
-          lastMilestone.current = scoreValue
-          setMilestoneText(randomCompliment())
-          window.setTimeout(() => setMilestoneText(''), 1200)
-        }
-      })
+      if (
+        scoreValue > 0 &&
+        scoreValue !== lastMilestone.current &&
+        (scoreValue % 50 === 0 || scoreValue % 100 === 0)
+      ) {
+        lastMilestone.current = scoreValue
+        setMilestoneText(randomCompliment())
+        window.setTimeout(() => setMilestoneText(''), 1200)
+      }
     }
 
     const loop = (timestamp) => {
@@ -603,17 +599,15 @@ function AngryBirdsGame({ avatar, audioContextRef, onBack }) {
     let dragging = false
 
     const checkMilestone = () => {
-      Promise.resolve().then(() => {
-        if (
-          scoreValue > 0 &&
-          scoreValue !== lastMilestone.current &&
-          (scoreValue % 50 === 0 || scoreValue % 100 === 0)
-        ) {
-          lastMilestone.current = scoreValue
-          setMilestoneText(randomCompliment())
-          window.setTimeout(() => setMilestoneText(''), 1200)
-        }
-      })
+      if (
+        scoreValue > 0 &&
+        scoreValue !== lastMilestone.current &&
+        (scoreValue % 50 === 0 || scoreValue % 100 === 0)
+      ) {
+        lastMilestone.current = scoreValue
+        setMilestoneText(randomCompliment())
+        window.setTimeout(() => setMilestoneText(''), 1200)
+      }
     }
 
     const resetShot = () => {
@@ -788,17 +782,15 @@ function FlappyPlatformGame({ avatar, audioContextRef, onBack }) {
     let spawnCounter = 0
 
     const checkMilestone = () => {
-      Promise.resolve().then(() => {
-        if (
-          scoreValue > 0 &&
-          scoreValue !== lastMilestone.current &&
-          (scoreValue % 50 === 0 || scoreValue % 100 === 0)
-        ) {
-          lastMilestone.current = scoreValue
-          setMilestoneText(randomCompliment())
-          window.setTimeout(() => setMilestoneText(''), 1200)
-        }
-      })
+      if (
+        scoreValue > 0 &&
+        scoreValue !== lastMilestone.current &&
+        (scoreValue % 50 === 0 || scoreValue % 100 === 0)
+      ) {
+        lastMilestone.current = scoreValue
+        setMilestoneText(randomCompliment())
+        window.setTimeout(() => setMilestoneText(''), 1200)
+      }
     }
 
     const loop = (timestamp) => {
@@ -999,7 +991,7 @@ function HomePage({ onNavigate }) {
               ready ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'
             }`}
           >
-            <h1 className="mb-4 text-3xl font-black text-pink-700 md:text-5xl">Happy Mother&apos;s Day ✨</h1>
+            <h1 className="mb-4 text-3xl font-black text-pink-700 md:text-5xl">Happy Mother's Day ✨</h1>
             <p className="text-base leading-8 md:text-lg">
               {appreciationText}{' '}
               <span className="font-black text-[#C71585]">from your most loved adi</span>
