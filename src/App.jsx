@@ -24,6 +24,27 @@ const gameConfig = {
 }
 
 const laneX = [180, 360, 540]
+const basePath = import.meta.env.BASE_URL
+
+function toMediaUrl(fileName) {
+  return `${basePath}${fileName}`
+}
+
+function resolveRouteFromPath(pathname) {
+  const normalizedBasePath = basePath === '/' ? '' : basePath.replace(/\/$/, '')
+  let routePath = pathname
+
+  if (normalizedBasePath && pathname.startsWith(normalizedBasePath)) {
+    routePath = pathname.slice(normalizedBasePath.length)
+  }
+
+  const route = routePath.replace(/^\/|\/$/g, '')
+  return gameConfig[route] ? route : 'home'
+}
+
+function routeToPath(route) {
+  return route === 'home' ? basePath : `${basePath}${route}`
+}
 
 function playTone(audioContextRef, frequency, type = 'sine', duration = 0.12) {
   if (!audioContextRef.current) {
@@ -68,29 +89,23 @@ function useHighScore(storageKey) {
 }
 
 function useRouteTransition() {
-  const [renderedRoute, setRenderedRoute] = useState(() => {
-    const path = window.location.pathname.replace('/', '')
-    return gameConfig[path] ? path : 'home'
-  })
+  const [renderedRoute, setRenderedRoute] = useState(() =>
+    resolveRouteFromPath(window.location.pathname),
+  )
   const [opacityClass, setOpacityClass] = useState('opacity-100')
 
   const navigate = useCallback((nextRoute) => {
     setOpacityClass('opacity-0')
     window.setTimeout(() => {
       setRenderedRoute(nextRoute)
-      if (nextRoute === 'home') {
-        window.history.pushState({}, '', '/')
-      } else {
-        window.history.pushState({}, '', `/${nextRoute}`)
-      }
+      window.history.pushState({}, '', routeToPath(nextRoute))
       setOpacityClass('opacity-100')
     }, 500)
   }, [])
 
   useEffect(() => {
     const handler = () => {
-      const path = window.location.pathname.replace('/', '')
-      const target = gameConfig[path] ? path : 'home'
+      const target = resolveRouteFromPath(window.location.pathname)
       setRenderedRoute(target)
       setOpacityClass('opacity-100')
     }
@@ -988,7 +1003,7 @@ function HomePage({ onNavigate }) {
               {carouselImages.map((image, index) => (
                 <img
                   key={image}
-                  src={`/${image}`}
+                  src={toMediaUrl(image)}
                   alt={`Family memory ${index + 1}`}
                   className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-700 ${
                     slide === index ? 'opacity-100' : 'opacity-0'
@@ -1038,7 +1053,7 @@ function HomePage({ onNavigate }) {
 function App() {
   const avatar = useMemo(() => {
     const image = new Image()
-    image.src = '/1.jpeg'
+    image.src = toMediaUrl('1.jpeg')
     return image
   }, [])
   const audioContextRef = useRef(null)
@@ -1048,7 +1063,7 @@ function App() {
   useEffect(() => {
     const startAudio = () => {
       if (!musicRef.current) {
-        const audio = new Audio('/10.mp3')
+        const audio = new Audio(toMediaUrl('10.mp3'))
         audio.loop = true
         audio.volume = 0.6
         audio.play().catch(() => {})
