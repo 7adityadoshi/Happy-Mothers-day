@@ -1,6 +1,17 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 
-const carouselImages = ['2.jpeg', '3.jpeg', '4.jpeg', '5.jpeg', '6.jpeg', '7.jpeg', '8.jpeg', '9.jpeg']
+const carouselImages = [
+  '2.jpeg',
+  '3.jpeg',
+  '4.jpeg',
+  '5.jpeg',
+  '6.jpeg',
+  '7.jpeg',
+  '8.jpeg',
+  '9.jpeg',
+  '11.jpeg',
+  '12.jpeg',
+]
 const compliments = ['hardworking', 'loving', 'supermom', 'best chef', 'master multitasker']
 const appreciationText =
   'To the prettiest woman of all. Thank you for seamlessly managing both your professional work and our home, and for keeping us all so happy. Your incredible food and endless care mean everything to me. I will miss you and your cooking terribly when I leave for FLAME University for the next two years. I value you the most.'
